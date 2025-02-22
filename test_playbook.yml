@@ -1,0 +1,15 @@
+- name: Test Ansible Debugger
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Task 1 - Echo Hello
+      command: echo "Hello, Ansible!"
+    
+    - name: Task 2 - Create a file
+      file:
+        path: /tmp/test_file.txt
+        state: touch
+    
+    - name: Task 3 - Intentional failure (to test debugging)
+      command: cat /non_existent_file
+
