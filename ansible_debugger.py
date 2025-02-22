@@ -5,7 +5,7 @@ import time
 import json
 from rich.console import Console
 import subprocess
-
+import os
 
 logging.basicConfig(filename="debugsible.log", level=logging.INFO,
                     format="%(asctime)s - %(levelname)s - %(message)s")
@@ -40,8 +40,16 @@ def log_task(task_name, status, command, stdout="", stderr="", return_code=None,
     save_debug_session()
 
 def run_task(task_name, inventory):
-    result = ansible_runner.interface.run(private_data_dir='.', playbook=task_name, inventory=inventory, quiet=True)
+    
+    result = ansible_runner.interface.run(
+        private_data_dir='.',
+        playbook=task_name,
+        inventory=inventory,
+        quiet=False,  
+        debug=True    
+    )
     return result
+
 
 def run_playbook_step_by_step(playbook, inventory):
     console.print(f"[bold cyan]Starting playbook:[/bold cyan] {playbook}")
@@ -176,6 +184,8 @@ def run_playbook_step_by_step(playbook, inventory):
 @click.option("--inventory", default="inventory.ini", help="Path to inventory file")
 @click.option("--step", is_flag=True, help="Run step-by-step")
 def main(playbook, inventory, step):
+    if os.path.exists(DEBUG_SESSION_FILE):
+        os.remove(DEBUG_SESSION_FILE)
     if step:
         run_playbook_step_by_step(playbook, inventory)
     else:
