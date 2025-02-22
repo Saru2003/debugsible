@@ -58,7 +58,7 @@ python debugsible.py --playbook sample_playbook.yml --inventory inventory.ini
 
 Watch the tool in action:
 
-[![Watch the Demo](https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue)](<https://youtu.be/UUUG9zZkuRE>)
+[![Watch the Demo](https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue)](<https://youtu.be/GWJLOYVef48>)
 
 ## How It Works
 
